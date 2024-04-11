@@ -181,7 +181,7 @@ public class TestePrincipal {
 		
 		boolean resultado = Operacoes.existeAlunoRA(classe, 999); 
 
-		System.out.println("Teste existeAlunoRA com RA n�o existente: "
+		System.out.println("Teste existeAlunoRA com RA não existente: "
 				+ (!resultado ? "Sucesso" : "Falha"));
 	}
 

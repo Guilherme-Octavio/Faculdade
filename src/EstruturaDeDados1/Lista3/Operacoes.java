@@ -22,11 +22,16 @@ public class Operacoes {
 	 * 
 	 */
 	static String imprimir(Aluno[] classe) {
-		String nomes = "";
-		for (Aluno c: classe){
-			nomes += c.nome + ", ";
-		}return "{"+nomes+"}";
-	}
+        String result = "{}";
+        String nomes = "";
+		if (classe != null) {
+            for (Aluno c: classe){
+                nomes += c.nome + ", ";
+            }
+            result = "{" + nomes + "}";
+        }
+        return result;
+    }
 	
 	
 	
@@ -55,19 +60,20 @@ public class Operacoes {
 	 * 
 	 */
 	static Aluno encontrarMaiorMedia(Aluno[] classe) {
-		double maiorMedia = calcularMedia(classe[0]);
-		int maiorMediaIdx = 0;
-		double media;
-		for (int i = 1; i < classe.length; i++) {
-			media = calcularMedia(classe[i]);
-			if (maiorMedia > media){
-				maiorMedia = media;
-				maiorMediaIdx = i;
-			}else{
-				System.err.println("Classe Nula");
-			}
+		try {
+			double maiorMedia = calcularMedia(classe[0]);
+			int maiorMediaIdx = 0;
+			double media;
+			for (int i = 1; i < classe.length; i++) {
+				media = calcularMedia(classe[i]);
+				if (maiorMedia > media) {
+					maiorMedia = media;
+					maiorMediaIdx = i;
+				}
+			}return classe[maiorMediaIdx];
+		} catch (Exception e){
+			return null;
 		}
-		return classe[maiorMediaIdx];
 	}
 	
 	
