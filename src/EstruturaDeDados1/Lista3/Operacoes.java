@@ -24,11 +24,11 @@ public class Operacoes {
 	static String imprimir(Aluno[] classe) {
         String result = "{}";
         String nomes = "";
-		if (classe != null) {
-            for (Aluno c: classe){
-                nomes += c.nome + ", ";
+		if (classe != null && classe.length > 0) {
+            for (int i = 0; i < classe.length - 1; i++){
+                nomes += classe[i].nome + ", ";
             }
-            result = "{" + nomes + "}";
+            result = "{" + nomes + classe[classe.length - 1].nome + "}";
         }
         return result;
     }
@@ -43,10 +43,15 @@ public class Operacoes {
 	 */
 	static double calcularMedia(Aluno alu) {
 		double media = 0;
-		for (int i = 0; i < alu.notas.length; i++) {
-			media += alu.notas[i];
+		if (alu.notas.length > 0) {
+
+
+			for (int i = 0; i < alu.notas.length; i++) {
+				media += alu.notas[i];
+			}
+			return media / alu.notas.length;
 		}
-		return media / alu.notas.length;
+		return 0;
 	}
 	
 
@@ -60,20 +65,18 @@ public class Operacoes {
 	 * 
 	 */
 	static Aluno encontrarMaiorMedia(Aluno[] classe) {
-		try {
-			double maiorMedia = calcularMedia(classe[0]);
+			double maiorMedia = 0;
 			int maiorMediaIdx = 0;
 			double media;
-			for (int i = 1; i < classe.length; i++) {
-				media = calcularMedia(classe[i]);
-				if (maiorMedia > media) {
-					maiorMedia = media;
-					maiorMediaIdx = i;
-				}
-			}return classe[maiorMediaIdx];
-		} catch (Exception e){
-			return null;
-		}
+			if (classe != null && classe.length > 0) {
+				for (int i = 0; i < classe.length; i++) {
+					media = calcularMedia(classe[i]);
+					if (maiorMedia < media) {
+						maiorMedia = media;
+						maiorMediaIdx = i;
+					}
+				}return classe[maiorMediaIdx];
+			}return null;
 	}
 	
 	
@@ -106,11 +109,19 @@ public class Operacoes {
 	 * 
 	 */
 	static String aprovados(Aluno[] classe, double notaCorte) {
-		String Aprovados = "";
-		for (Aluno c: classe){
-			if (calcularMedia(c) >= notaCorte){
-				Aprovados += c.nome + ", ";
+		StringBuilder aprovados = new StringBuilder();
+		if (classe != null && classe.length > 0) {
+			for (Aluno aluno : classe) {
+				if (calcularMedia(aluno) >= notaCorte) {
+					aprovados.append(aluno.nome).append(", ");
+				}
 			}
-		}return "{"+Aprovados+"}";
+			if (!aprovados.isEmpty()) {
+				// Remove a vírgula e o espaço após o último nome
+				aprovados.delete(aprovados.length() - 2, aprovados.length());
+			}
+		}
+		return "{" + aprovados + "}";
 	}
+
 }
