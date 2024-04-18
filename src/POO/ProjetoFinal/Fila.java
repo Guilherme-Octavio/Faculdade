@@ -9,33 +9,39 @@ public class Fila extends EstrategiaFIFO {
     public Fila(TipoLista tipoLista) {
         this.fila = new LinkedList<>();
         this.tipoLista = tipoLista;
+
     }
 
     @Override
     public String inserir() {
+
         try {
-            fila.add(new Senha());
+            fila.add();
         } catch (Exception e) {
-            return "" + e;
+            return "Erro na criação da senha: " + e;
         }
         return "Senha criada com sucesso";
     }
 
     @Override
     public void remover() {
+        if (fila.getFirst() == null) {
+            System.err.println("Não tem nada na fila para excluir");
+        } fila.removeLast();
         // Implementação da remoção da fila (não fornecida)
     }
 
     @Override
     public String chamar() {
+
         // Implementação da chamada da próxima senha (não fornecida)
-        return "";
+        return fila.getFirst().toString();
     }
 
     @Override
     public String atender() {
         // Implementação do atendimento da próxima senha (não fornecida)
-        return "";
+        return tipoLista.name() + fila.getFirst();
     }
 
     @Override

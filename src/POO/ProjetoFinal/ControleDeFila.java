@@ -1,10 +1,11 @@
 package POO.ProjetoFinal;
 
-import java.util.LinkedList;
-
 public class ControleDeFila {
     static TipoLista preferencial = TipoLista.PREFERENCIAL;
     static Fila filaPreferencial = new Fila(preferencial);
+
+    static TipoLista vip = TipoLista.VIP;
+    static Fila filaVip = new Fila(vip);
 
     public static void main(String[] args) {
         filaPreferencial.inserir();
@@ -19,7 +20,6 @@ public class ControleDeFila {
         for (Senha senha : senhas) {
             listaSenhas.append(tipoLista.tipo).append(":").append(senha.retornarSenha()).append("\n");
         }
-
         return listaSenhas.toString();
     }
 }
