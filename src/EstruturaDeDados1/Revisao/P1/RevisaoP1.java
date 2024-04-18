@@ -6,6 +6,11 @@ import java.lang.reflect.AnnotatedArrayType;
 public class RevisaoP1 {
 
     public static void main(String[] args) {
+        // Resolução - Exec 1
+        System.out.print("Exec1: ");
+        imprimeIntervalo(1, 10);
+        System.out.println(' ');
+
         // Resolução - Exec 2
         System.out.println("Exec2: " +calculaExponenciacao(2, 2));
 
@@ -24,6 +29,14 @@ public class RevisaoP1 {
         assert pegaAlunoIdade(pessoa) != null;
         System.out.println("Exec4: "+pegaAlunoIdade(pessoa).nome);
 
+    }
+    // Exec 1
+    static void imprimeIntervalo(int vInicial, int vFinal){
+        for (int i = vInicial; i < vFinal; i++) {
+            if (i % 2 == 0){
+                System.out.print(i+", ");
+            }
+        }
     }
 
     // Exec 2
