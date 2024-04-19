@@ -16,7 +16,8 @@ public class Fila extends EstrategiaFIFO {
     public String inserir() {
 
         try {
-            fila.add();
+            //fila.add();
+            System.err.println("erro");
         } catch (Exception e) {
             return "Erro na criação da senha: " + e;
         }

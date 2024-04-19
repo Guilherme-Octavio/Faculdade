@@ -21,9 +21,9 @@ public class ListaDesordenada {
         String res = "";
         if (elementos != null && quantidade > 0) {
             for (int i = 0; i < quantidade - 1; i++) {
-                res += ("{ Nome: " + elementos[i].nome + ", Idade: " + elementos[i].idade + "},");
+                res += ("{ Nome: " + elementos[i].nome + ", Idade: " + elementos[i].idade + "}, \n");
             }
-            res += ("{ Nome: " + elementos[quantidade].nome + ", Idade: "+elementos[quantidade].idade+"}");
+            res += ("{ Nome: " + elementos[quantidade-1].nome + ", Idade: "+elementos[quantidade-1].idade+"}");
         } return res;
     }
 }
