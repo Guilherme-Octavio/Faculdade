@@ -22,5 +22,9 @@ public class ControleDeFila {
         }
         return listaSenhas.toString();
     }
+
+    String InsereLista(){
+        return "";
+    }
 }
 

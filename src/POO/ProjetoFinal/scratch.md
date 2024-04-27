@@ -1,0 +1,8 @@
+## Prioridade das filas
+
+1. URGENTE
+2. IDOSO 80
+3. IDOSO
+4. PREFERENCIAL
+5. VIP
+6. NORMAL
