@@ -10,6 +10,9 @@ public class UITutorial extends JFrame{
     private JButton buttonMostrar;
     private JPanel uiPanel;
     private JLabel labelNomeCompleto;
+    private JCheckBox checkUCase;
+    private JRadioButton radioMasculino;
+    private JRadioButton radioFeminino;
 
     public UITutorial(){
         setContentPane(uiPanel);
@@ -21,9 +24,13 @@ public class UITutorial extends JFrame{
         buttonMostrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nomeCompleto = textNome.getText() + " " + textSobrenome.getText();
+                String sobrenome = (checkUCase.isSelected()) ? textSobrenome.getText().toUpperCase() : textSobrenome.getText();
+                String nomeCompleto = textNome.getText() + " " + sobrenome;
+                String message = nomeCompleto;
                 labelNomeCompleto.setText(nomeCompleto);
-                JOptionPane.showMessageDialog(uiPanel, nomeCompleto);
+
+                message = (radioMasculino.isSelected()) ? ", Masculino" : ", Feminino";
+                JOptionPane.showMessageDialog(uiPanel, message);
             }
         });
     }
