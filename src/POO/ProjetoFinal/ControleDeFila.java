@@ -1,30 +1,29 @@
 package POO.ProjetoFinal;
 
+import java.util.HashMap;
+import java.util.Queue;
+
 public class ControleDeFila {
-    static TipoLista preferencial = TipoLista.PREFERENCIAL;
+    static final TipoLista urgente = TipoLista.URGENTE;
+    static Fila filaUrgente = new Fila(urgente);
+
+    static final TipoLista preferencial = TipoLista.PREFERENCIAL;
     static Fila filaPreferencial = new Fila(preferencial);
 
-    static TipoLista vip = TipoLista.VIP;
+    static final TipoLista idoso80 = TipoLista.IDOSO80;
+    static Fila filaIdoso80 = new Fila(idoso80);
+
+    static final TipoLista idoso = TipoLista.IDOSO;
+    static Fila filaIdoso = new Fila(idoso);
+
+    static final TipoLista vip = TipoLista.VIP;
     static Fila filaVip = new Fila(vip);
 
+    static Fila filaGeral = new Fila();
+    static HashMap<Fila, Queue<Senha>>
+
     public static void main(String[] args) {
-        filaPreferencial.inserir();
-        System.out.println(ListaTipoFilaMaisSenha(filaPreferencial, preferencial));
-    }
 
-    static String ListaTipoFilaMaisSenha(Fila fila, TipoLista tipoLista) {
-        Senha[] senhas = fila.fila.toArray(new Senha[0]);
-        StringBuilder listaSenhas = new StringBuilder();
-        listaSenhas.append("Lista de Senhas na Fila:\n");
-
-        for (Senha senha : senhas) {
-            listaSenhas.append(tipoLista.tipo).append(":").append(senha.retornarSenha()).append("\n");
-        }
-        return listaSenhas.toString();
-    }
-
-    String InsereLista(){
-        return "";
     }
 }
 

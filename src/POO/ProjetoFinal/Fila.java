@@ -4,56 +4,48 @@ import java.util.LinkedList;
 
 public class Fila extends EstrategiaFIFO {
     protected LinkedList<Senha> fila;
-    private TipoLista tipoLista;
+    private final TipoLista tipoLista;
 
     public Fila(TipoLista tipoLista) {
         this.fila = new LinkedList<>();
         this.tipoLista = tipoLista;
 
     }
-
     @Override
-    public String inserir() {
-
-        try {
-            //fila.add();
-            System.err.println("erro");
-        } catch (Exception e) {
-            return "Erro na criação da senha: " + e;
-        }
-        return "Senha criada com sucesso";
+    public void inserir() {
+        fila.add(new Senha());
     }
-
     @Override
     public void remover() {
-        if (fila.getFirst() == null) {
-            System.err.println("Não tem nada na fila para excluir");
-        } fila.removeLast();
-        // Implementação da remoção da fila (não fornecida)
+        if (fila.getFirst() != null) {
+            fila.removeLast();
+        }
     }
-
     @Override
     public String chamar() {
-
-        // Implementação da chamada da próxima senha (não fornecida)
-        return fila.getFirst().toString();
+        if (fila.getFirst() != null) {
+            Senha senha = fila.getFirst();
+            if (senha.getChamado()) {
+                return senha.retornarSenha();
+            }
+            return fila.getFirst().toString();
+        }
+        return "Fila vazia";
     }
-
     @Override
     public String atender() {
-        // Implementação do atendimento da próxima senha (não fornecida)
-        return tipoLista.name() + fila.getFirst();
+        if (fila.getFirst() != null) {
+            return tipoLista.name() + fila.getFirst();
+        }
+        return "Fila vazia";
     }
-
     @Override
     public String listar() {
         StringBuilder listaSenhas = new StringBuilder();
         listaSenhas.append("Lista de Senhas na Fila:\n");
-
         for (Senha senha : fila) {
             listaSenhas.append(senha.retornarSenha()).append("\n");
         }
-
         return listaSenhas.toString();
     }
 }
