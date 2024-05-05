@@ -12,40 +12,51 @@ public class Fila extends EstrategiaFIFO {
 
     }
     @Override
-    public void inserir() {
-        fila.add(new Senha());
+    public String inserir() {
+        try{
+            fila.add(new Senha());
+            return "Senha Adicionada";
+        } catch (Exception e){
+            return "erro ao inserir senha: "+ e;
+        }
     }
     @Override
-    public void remover() {
-        if (fila.getFirst() != null) {
-            fila.removeLast();
+    public String remover() {
+        if (fila.peek() != null) {
+            fila.removeLast(); // Remove o último elemento da fila
+            return "Senha removida com sucesso.";
+        } else {
+            return "Fila vazia. Não há senhas para remover.";
         }
     }
     @Override
     public String chamar() {
-        if (fila.getFirst() != null) {
-            Senha senha = fila.getFirst();
-            if (senha.getChamado()) {
-                return senha.retornarSenha();
-            }
-            return fila.getFirst().toString();
+        if (!fila.isEmpty()) {
+            // Define a senha como chamada
+            assert fila.peek() != null;
+            return "SENHA: " + fila.peek().retornarSenha();
+        } else {
+            return "Fila vazia. Não há senhas para chamar.";
         }
-        return "Fila vazia";
     }
     @Override
     public String atender() {
-        if (fila.getFirst() != null) {
-            return tipoLista.name() + fila.getFirst();
+        if (!fila.isEmpty()) {
+            fila.poll(); // Remove a próxima senha da fila
+            return "Senha atendida com sucesso.";
+        } else {
+            return "Fila vazia. Não há senhas para atender.";
         }
-        return "Fila vazia";
     }
     @Override
     public String listar() {
-        StringBuilder listaSenhas = new StringBuilder();
-        listaSenhas.append("Lista de Senhas na Fila:\n");
-        for (Senha senha : fila) {
-            listaSenhas.append(senha.retornarSenha()).append("\n");
-        }
-        return listaSenhas.toString();
+        if (fila.peek() != null) {
+            StringBuilder listaSenhas = new StringBuilder();
+            listaSenhas.append("Lista de Senhas na Fila ").append(tipoLista.tipo).append(":\n");
+            for (Senha f: fila) {
+                listaSenhas.append(f.retornarSenha()).append("\n");
+            }
+            return listaSenhas.toString();
+        } return "Fila vazia. Não há senhas para chamar.";
     }
 }

@@ -10,9 +10,9 @@ package POO.ProjetoFinal;
 public abstract class EstrategiaFIFO {
     //Define a classe abstrata 'EstrategiaFIFO' a partir do método FIFO
 
-    public abstract void inserir();
+    public abstract String inserir();
 
-    public abstract void remover();
+    public abstract String remover();
 
     public abstract String chamar();
 
