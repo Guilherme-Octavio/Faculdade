@@ -1,8 +1,5 @@
 package POO.ProjetoFinal;
 
-import java.util.HashMap;
-import java.util.Queue;
-
 public class ControleDeFila {
     static final TipoLista urgente = TipoLista.URGENTE;
     static Fila filaUrgente = new Fila(urgente);
@@ -25,6 +22,9 @@ public class ControleDeFila {
     // static Fila filaGeral = new Fila();
 
     public static void main(String[] args) {
+        System.out.println(filaNormal.inserir());
+        System.out.println(filaNormal.inserir());
+        System.out.println(filaNormal.inserir());
         System.out.println(filaNormal.inserir());
         System.out.println(filaNormal.inserir());
         System.out.println(filaNormal.listar());

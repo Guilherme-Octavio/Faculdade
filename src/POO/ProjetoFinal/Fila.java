@@ -5,39 +5,31 @@ import java.util.LinkedList;
 public class Fila extends EstrategiaFIFO {
     protected LinkedList<Senha> fila;
     private final TipoLista tipoLista;
-
     public Fila(TipoLista tipoLista) {
         this.fila = new LinkedList<>();
         this.tipoLista = tipoLista;
-
     }
     @Override
     public String inserir() {
-        try{
-            fila.add(new Senha());
-            return "Senha Adicionada";
-        } catch (Exception e){
-            return "erro ao inserir senha: "+ e;
-        }
+        Senha novaSenha = new Senha();
+        fila.add(novaSenha);
+        return "Senha: " + novaSenha.retornarSenha();
     }
     @Override
-    public String remover() {
-        if (fila.peek() != null) {
+    public void remover() {
+        if (!fila.isEmpty()) {
             fila.removeLast(); // Remove o último elemento da fila
-            return "Senha removida com sucesso.";
-        } else {
-            return "Fila vazia. Não há senhas para remover.";
         }
     }
     @Override
     public String chamar() {
-        if (!fila.isEmpty()) {
-            // Define a senha como chamada
-            assert fila.peek() != null;
-            return "SENHA: " + fila.peek().retornarSenha();
-        } else {
-            return "Fila vazia. Não há senhas para chamar.";
-        }
+        if (!fila.isEmpty()){
+            if (!fila.peek().getChamado()){
+                fila.peek().setChamado();
+                return fila.peek().retornarSenha();
+            }
+            return fila.peek().retornarSenha();
+        } return "Fila vazia. Não há senhas para atender.";
     }
     @Override
     public String atender() {

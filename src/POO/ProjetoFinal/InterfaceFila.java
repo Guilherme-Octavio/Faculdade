@@ -1,9 +1,6 @@
 package POO.ProjetoFinal;
 
-import EstruturaDeDados1.Vetores.Teste;
-
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,27 +12,20 @@ public class InterfaceFila extends JFrame {
     private JTextField textNome;
     private JButton ButtonChamar;
     private JButton ButtonAtender;
+    private JTextField textSobrenome;
 
-   public InterfaceFila(){
+    public InterfaceFila(){
        setContentPane(uiPanel);
        setTitle("Tutorial");
        setDefaultCloseOperation(EXIT_ON_CLOSE);
-       setSize(300, 600);
+       setSize(600, 300);
        setLocationRelativeTo(null);
-       DefaultTableModel model = new DefaultTableModel();
-
-       model.addColumn("Teste");
-
-       tableFila.setModel(model);
 
        adicionarButton.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
                // Adicionar nova linha à tabela quando o botão for clicado
-               String nome = textNome.getText();
-               model.addRow(new Object[]{nome});
-               // Limpar campo de texto após adicionar
-               textNome.setText("");
+               JOptionPane.showMessageDialog(uiPanel, ControleDeFila.filaNormal.inserir());
            }
        });
        setVisible(true);
