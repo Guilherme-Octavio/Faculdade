@@ -12,7 +12,7 @@ public abstract class EstrategiaFIFO {
 
     public abstract String inserir();
 
-    public abstract void remover();
+    public abstract String remover();
 
     public abstract String chamar();
 

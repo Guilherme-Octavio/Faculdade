@@ -20,6 +20,7 @@ public class Fila extends EstrategiaFIFO {
         if (!fila.isEmpty()) {
             fila.removeLast(); // Remove o último elemento da fila
         }
+        return "Fila vazia";
     }
     @Override
     public String chamar() {
