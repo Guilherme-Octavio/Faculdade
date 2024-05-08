@@ -12,6 +12,7 @@ public class Fila extends EstrategiaFIFO {
     @Override
     public String inserir() {
         Senha novaSenha = new Senha();
+        novaSenha.gerarSenha();
         fila.add(novaSenha);
         return "Senha: " + novaSenha.retornarSenha();
     }
@@ -34,7 +35,7 @@ public class Fila extends EstrategiaFIFO {
     @Override
     public String atender() {
         if (!fila.isEmpty()) {
-            fila.poll(); // Remove a próxima senha da fila
+            String SenhaRemovida = fila.poll().retornarSenha(); // Remove a próxima senha da fila
             return "Senha atendida com sucesso.";
         } else {
             return "Fila vazia. Não há senhas para atender.";

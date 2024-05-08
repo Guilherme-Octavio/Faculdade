@@ -1,5 +1,14 @@
 package POO.ProjetoFinal;
 
+/*
+ * Autor         Guilherme Octávio Silva Amorim
+ *               Lucas Lotti
+ *               Augusto Calhas
+ * Data          15/03/2024
+ * Disciplina    Programação Orientada a Objetos
+ * Atividade     AVALIATIVA FINAL (3SI)
+ */
+
 public class ControleDeFila {
     static final TipoLista urgente = TipoLista.URGENTE;
     static Fila filaUrgente = new Fila(urgente);
