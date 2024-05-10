@@ -52,7 +52,7 @@
           <model>
             <item value="URGENTE"/>
             <item value="IDOSO80"/>
-            <item value="IDOSO60"/>
+            <item value="IDOSO"/>
             <item value="PREFERENCIAL"/>
             <item value="VIP"/>
             <item value="NORMAL"/>
