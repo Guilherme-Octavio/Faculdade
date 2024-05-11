@@ -1,13 +1,15 @@
 package POO.ProjetoFinal;
 
 /*
- * Autor         Guilherme Octávio Silva Amorim
+ * Autores         Guilherme Octávio Silva Amorim
  *               Lucas Lotti
  *               Augusto Calhas
  * Data          15/03/2024
  * Disciplina    Programação Orientada a Objetos
  * Atividade     AVALIATIVA FINAL (3SI)
  */
+
+import java.sql.SQLException;
 
 public class ControleDeFila {
     static final TipoLista urgente = TipoLista.URGENTE;
@@ -30,7 +32,9 @@ public class ControleDeFila {
 
     // static Fila filaGeral = new Fila();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        SqlDatabaseConnection connection = new SqlDatabaseConnection();
+        System.out.println(connection.conectar());
         System.out.println(filaNormal.inserir());
         System.out.println(filaNormal.inserir());
         System.out.println(filaNormal.inserir());
@@ -39,6 +43,8 @@ public class ControleDeFila {
         System.out.println(filaNormal.listar());
         System.out.println(filaNormal.chamar());
         System.out.println(filaNormal.chamar());
+        filaNormal.remover();
+        System.out.println(filaNormal.listar());
         System.out.println(filaNormal.atender());
         System.out.println(filaNormal.chamar());
         System.out.println(filaNormal.listar());
