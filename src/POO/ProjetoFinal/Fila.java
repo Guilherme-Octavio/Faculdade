@@ -35,7 +35,7 @@ public class Fila extends EstrategiaFIFO {
         Senha novaSenha = new Senha();
         novaSenha.gerarSenha();
         fila.add(novaSenha);
-        return "Senha: " + novaSenha.retornarSenha();
+        return "Senha: "+ tipoLista.tipo+ ' ' + novaSenha.retornarSenha();
     }
     @Override
     public void remover() {
