@@ -10,6 +10,8 @@ package POO.ProjetoFinal;
  */
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ControleDeFila {
     static final TipoLista urgente = TipoLista.URGENTE;
@@ -30,24 +32,31 @@ public class ControleDeFila {
     static final TipoLista normal = TipoLista.NORMAL;
     static Fila filaNormal = new Fila(normal);
 
-    // static Fila filaGeral = new Fila();
+    static Map<TipoLista, Fila> filas;
+
+    public ControleDeFila(){
+        this.filas = new HashMap<>();
+        CreateFilas();
+    }
+
+    void CreateFilas(){
+        for (TipoLista l: TipoLista.values()){
+            filas.put(l, new Fila(l));
+        }
+    }
+
+    void InserirFilas(TipoLista t){
+        Fila filaSelecionada = filas.get(t);
+        filaSelecionada.inserir();
+    }
+
+    void Chamar(){
+        
+    }
+
 
     public static void main(String[] args) throws SQLException {
-        SqlDatabaseConnection connection = new SqlDatabaseConnection();
-        System.out.println(connection.conectar());
-        System.out.println(filaNormal.inserir());
-        System.out.println(filaNormal.inserir());
-        System.out.println(filaNormal.inserir());
-        System.out.println(filaNormal.inserir());
-        System.out.println(filaNormal.inserir());
-        System.out.println(filaNormal.listar());
-        System.out.println(filaNormal.chamar());
-        System.out.println(filaNormal.chamar());
-        filaNormal.remover();
-        System.out.println(filaNormal.listar());
-        System.out.println(filaNormal.atender());
-        System.out.println(filaNormal.chamar());
-        System.out.println(filaNormal.listar());
+
     }
 }
 

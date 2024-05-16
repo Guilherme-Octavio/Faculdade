@@ -2,27 +2,6 @@ package POO.ProjetoFinal;
 
 import java.util.LinkedList;
 
-import java.sql.*;
-class SqlDatabaseConnection{
-    String URL = "jdbc:sqlserver://GUILHERME/SQLEXPRESS;"
-            + "database=ControleDeFila_db;"
-            + "user=sa;"
-            + "password="
-            + "encrypt=true;"
-            + "trustServerCertificate=false;"
-            + "loginTimeout=30;";
-
-    String conectar() throws SQLException {
-        try (Connection conn = DriverManager.getConnection(URL);) {
-            return "Conexão com banco de dados: OK";
-        }
-        catch (SQLException e) {
-            return "Erro na conexão: " + e.toString();
-
-        }
-    }
-}
-
 public class Fila extends EstrategiaFIFO {
     protected LinkedList<Senha> fila;
     private final TipoLista tipoLista;
