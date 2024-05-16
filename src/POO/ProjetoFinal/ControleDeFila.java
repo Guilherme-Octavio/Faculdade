@@ -9,54 +9,106 @@ package POO.ProjetoFinal;
  * Atividade     AVALIATIVA FINAL (3SI)
  */
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ControleDeFila {
-    static final TipoLista urgente = TipoLista.URGENTE;
-    static Fila filaUrgente = new Fila(urgente);
+    private static final TipoLista[] ordemPrioridade = {
+            TipoLista.URGENTE,
+            TipoLista.IDOSO80,
+            TipoLista.PREFERENCIAL,
+            TipoLista.IDOSO,
+            TipoLista.VIP,
+            TipoLista.NORMAL
+    };
 
-    static final TipoLista preferencial = TipoLista.PREFERENCIAL;
-    static Fila filaPreferencial = new Fila(preferencial);
+    private static final Map<TipoLista, Fila> filas = new HashMap<>();
 
-    static final TipoLista idoso80 = TipoLista.IDOSO80;
-    static Fila filaIdoso80 = new Fila(idoso80);
-
-    static final TipoLista idoso = TipoLista.IDOSO;
-    static Fila filaIdoso = new Fila(idoso);
-
-    static final TipoLista vip = TipoLista.VIP;
-    static Fila filaVip = new Fila(vip);
-
-    static final TipoLista normal = TipoLista.NORMAL;
-    static Fila filaNormal = new Fila(normal);
-
-    static Map<TipoLista, Fila> filas;
-
-    public ControleDeFila(){
-        this.filas = new HashMap<>();
-        CreateFilas();
+    public ControleDeFila() {
+        criarFilas();
     }
 
-    void CreateFilas(){
-        for (TipoLista l: TipoLista.values()){
-            filas.put(l, new Fila(l));
+    private void criarFilas() {
+        for (TipoLista tipo : TipoLista.values()) {
+            filas.put(tipo, new Fila(tipo));
         }
     }
 
-    void InserirFilas(TipoLista t){
-        Fila filaSelecionada = filas.get(t);
-        filaSelecionada.inserir();
+    public String inserirFila(TipoLista tipo) {
+        Fila filaSelecionada = filas.get(tipo);
+        if (filaSelecionada != null) {
+            return filaSelecionada.inserir();
+        }
+        return "Fila não encontrada: "+ tipo;
     }
 
-    void Chamar(){
-        
+    public void removerFila(TipoLista tipo) {
+        Fila filaSelecionada = filas.get(tipo);
+        if (filaSelecionada != null) {
+            filaSelecionada.remover();
+        }
+    }
+
+    public String chamarProximaSenha() {
+        for (TipoLista tipo : ordemPrioridade) {
+            Fila fila = filas.get(tipo);
+            if (fila != null && !fila.fila.isEmpty()) {
+                String senhaChamada = fila.chamar();
+                if (!senhaChamada.equals("Fila vazia. Não há senhas para chamar.")) {
+                    return "Chamando senha da fila " + tipo.tipo + senhaChamada;
+                }
+            }
+        }
+        return "Todas as filas estão vazias.";
     }
 
 
-    public static void main(String[] args) throws SQLException {
 
+    private String VerificaChamarDaFila(TipoLista tipo) {
+        Fila fila = filas.get(tipo);
+        if (fila != null && !fila.fila.isEmpty()) {
+            for (Senha senha : fila.fila) {
+                if (!senha.getChamado()) {
+                    senha.setChamado();
+                    return senha.retornarSenha();
+                }
+            }
+        }
+        return null;
+    }
+
+    public String atenderProximaSenha() {
+        for (TipoLista tipo : ordemPrioridade) {
+            String senhaAtendida = VerificaAtenderDaFila(tipo);
+            if (senhaAtendida != null) {
+                return "Atendendo senha da fila " + tipo.tipo + ": " + senhaAtendida;
+            }
+        }
+        return "Todas as filas estão vazias.";
+    }
+
+    private String VerificaAtenderDaFila(TipoLista tipo) {
+        Fila fila = filas.get(tipo);
+        if (fila != null && !fila.fila.isEmpty()) {
+            return fila.atender();
+        }
+        return null;
+    }
+
+    public String listarSenhas(TipoLista tipo) {
+        Fila filaSelecionada = filas.get(tipo);
+        if (filaSelecionada != null) {
+            return filaSelecionada.listar();
+        }
+        return "Fila " + tipo.tipo + " não encontrada.";
+    }
+
+    public void listarTodasAsSenhas() {
+        for (TipoLista tipo : TipoLista.values()) {
+            Fila fila = filas.get(tipo);
+            if (fila != null) {
+                System.out.println(fila.listar());
+            }
+        }
     }
 }
-
