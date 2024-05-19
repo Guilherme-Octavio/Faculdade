@@ -49,50 +49,70 @@ public class ControleDeFila {
         }
     }
 
-    public String chamarProximaSenha() {
-        for (TipoLista tipo : ordemPrioridade) {
+    private boolean existeSenha(){
+        for (TipoLista tipo : ordemPrioridade){
             Fila fila = filas.get(tipo);
-            if (fila != null && !fila.fila.isEmpty()) {
-                String senhaChamada = fila.chamar();
-                if (!senhaChamada.equals("Fila vazia. Não há senhas para chamar.")) {
-                    return "Chamando senha da fila " + tipo.tipo + senhaChamada;
-                }
+            if (!fila.fila.isEmpty()){
+                return true;
             }
-        }
-        return "Todas as filas estão vazias.";
+        } return false;
     }
 
-
-
-    private String VerificaChamarDaFila(TipoLista tipo) {
-        Fila fila = filas.get(tipo);
-        if (fila != null && !fila.fila.isEmpty()) {
-            for (Senha senha : fila.fila) {
-                if (!senha.getChamado()) {
-                    senha.setChamado();
-                    return senha.retornarSenha();
+    public Fila getFilaPossuiSenhaChamada(){
+        for (TipoLista tipo : ordemPrioridade){
+            Fila fila = filas.get(tipo);
+            if (!fila.fila.isEmpty()){
+                for (Senha senha : fila.fila){
+                    if (senha.getChamado()){
+                        return fila;
+                    }
                 }
             }
+        } return null;
+    }
+
+    public String chamarProximaSenha() {
+        if (!existeSenha())
+            return "Todas as filas estão vazias.";
+        else{
+            Fila fila = getFilaPossuiSenhaChamada();
+            if (fila != null){
+                return fila.chamar();
+            }else{
+                return chamarSenha();
+            }
         }
-        return null;
+    }
+
+    private String chamarSenha(){
+        for (TipoLista tipo : ordemPrioridade){
+            Fila fila = filas.get(tipo);
+            if (!fila.fila.isEmpty()){
+                return fila.chamar();
+            }
+        } return null;
     }
 
     public String atenderProximaSenha() {
-        for (TipoLista tipo : ordemPrioridade) {
-            String senhaAtendida = VerificaAtenderDaFila(tipo);
-            if (senhaAtendida != null) {
-                return "Atendendo senha da fila " + tipo.tipo + ": " + senhaAtendida;
+        if (!existeSenha())
+            return "Todas as filas estão vazias.";
+        else{
+            Fila fila = getFilaPossuiSenhaChamada();
+            if (fila != null){
+                return fila.atender();
+            }else{
+                return atenderSenha();
             }
         }
-        return "Todas as filas estão vazias.";
     }
 
-    private String VerificaAtenderDaFila(TipoLista tipo) {
-        Fila fila = filas.get(tipo);
-        if (fila != null && !fila.fila.isEmpty()) {
-            return fila.atender();
-        }
-        return null;
+    private String atenderSenha() {
+        for (TipoLista tipo : ordemPrioridade){
+            Fila fila = filas.get(tipo);
+            if (!fila.fila.isEmpty()){
+                return fila.atender();
+            }
+        } return null;
     }
 
     public String listarSenhas(TipoLista tipo) {

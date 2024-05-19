@@ -19,7 +19,7 @@ public class Fila extends EstrategiaFIFO {
     @Override
     public void remover() {
         if (!fila.isEmpty()) {
-            fila.removeLast(); // Remove o último elemento da fila
+            fila.removeLast();
         }
     }
     @Override
@@ -29,14 +29,14 @@ public class Fila extends EstrategiaFIFO {
                 fila.peek().setChamado();
                 return fila.peek().retornarSenha();
             }
-            return fila.peek().retornarSenha();
+            return tipoLista.tipo + fila.peek().retornarSenha();
         } return "Fila vazia. Não há senhas para atender.";
     }
     @Override
     public String atender() {
         if (!fila.isEmpty()) {
             String SenhaRemovida = fila.poll().retornarSenha(); // Remove a próxima senha da fila
-            return "Senha atendida com sucesso.";
+            return "Senha "+tipoLista.tipo + SenhaRemovida+" atendida com sucesso.";
         } else {
             return "Fila vazia. Não há senhas para atender.";
         }
