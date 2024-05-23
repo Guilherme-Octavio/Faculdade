@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
 
 public class InterfaceFila extends JFrame {
     private JComboBox<String> comboTipoFila;
@@ -13,6 +12,9 @@ public class InterfaceFila extends JFrame {
     private JTable tableFila;
     private JButton ButtonChamar;
     private JButton ButtonAtender;
+    private JButton ButtonSenhas;
+
+    private JScrollPane barraRolagem;
 
     private ControleDeFila fila = new ControleDeFila();
     public InterfaceFila(){
@@ -21,16 +23,13 @@ public class InterfaceFila extends JFrame {
        setDefaultCloseOperation(EXIT_ON_CLOSE);
        setSize(600, 300);
        setLocationRelativeTo(null);
-       //tableFila.addColumn();
-
+       criaGrid();
        adicionarButton.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
                 String TipoFila = Objects.requireNonNull(comboTipoFila.getSelectedItem()).toString();
                 String message = fila.inserirFila(TipoLista.valueOf(TipoFila));
                 JOptionPane.showMessageDialog(uiPanel, message);
-               // Adicionar nova linha à tabela quando o botão for clicado
-
            }
        });
        setVisible(true);
@@ -46,8 +45,21 @@ public class InterfaceFila extends JFrame {
                 JOptionPane.showMessageDialog(uiPanel, fila.atenderProximaSenha());
             }
         });
+        ButtonSenhas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(uiPanel, fila.listarTodasAsSenhas().To);
+            }
+        });
     }
+    private void criaGrid(){
+        String [] Colunas = {"NORMAL", "VIP", "IDOSO", "PREFERENCIAL", "IDOSO80", "URGENTE"};
+        Object [][] dados = {{001, 002, 003, 004}};
 
+        tableFila = new JTable(dados, Colunas);
+        barraRolagem = new JScrollPane();
+        tableFila.add(barraRolagem);
+    }
     public static void main(String[] args) {
         new InterfaceFila();
     }
