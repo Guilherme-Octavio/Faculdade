@@ -48,7 +48,7 @@ public class InterfaceFila extends JFrame {
         ButtonSenhas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(uiPanel, fila.listarTodasAsSenhas().To);
+                //JOptionPane.showMessageDialog(uiPanel, fila.);
             }
         });
     }

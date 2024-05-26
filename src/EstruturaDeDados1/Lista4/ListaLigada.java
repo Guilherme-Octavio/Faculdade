@@ -1,5 +1,7 @@
 package EstruturaDeDados1.Lista4;
 
+import java.util.Arrays;
+
 /**
  * 
  * Esta classe armazena o inicio da lista ligada (definida pelo 
@@ -32,7 +34,10 @@ public class ListaLigada {
 	 * 
 	 */
 	void inserir(Aluno novoAluno) {
-		
+		Elemento novoElemento = new Elemento();
+		novoElemento.alu = novoAluno;
+		novoElemento.proximo = raiz;
+		raiz = novoElemento;
 	}
 	
 	
@@ -50,7 +55,16 @@ public class ListaLigada {
 	 * 
 	 */
 	String imprimir() {
-		return "{}";
+		String resultado;
+		String nome = "";
+		Elemento percorre = raiz;
+		while (percorre != null){
+			nome += percorre.alu.nome + ",";
+			percorre = percorre.proximo;
+		}
+        resultado = "{" + nome + "}";
+
+        return resultado;
 	}
 	
 	
@@ -62,7 +76,8 @@ public class ListaLigada {
 	 * 
 	 */
 	double calcularMedia(Aluno alu) {
-		return 0;
+		double somaDasMedias = Arrays.stream(alu.notas).sum();
+		return somaDasMedias/alu.notas.length;
 	}
 	
 
