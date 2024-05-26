@@ -36,8 +36,17 @@ public class ListaLigada {
 	void inserir(Aluno novoAluno) {
 		Elemento novoElemento = new Elemento();
 		novoElemento.alu = novoAluno;
-		novoElemento.proximo = raiz;
-		raiz = novoElemento;
+		novoElemento.proximo = null;
+
+		if (raiz == null) {
+			raiz = novoElemento;
+		} else {
+			Elemento percorre = raiz;
+			while (percorre.proximo != null) {
+				percorre = percorre.proximo;
+			}
+			percorre.proximo = novoElemento;
+		}
 	}
 	
 	
@@ -55,20 +64,25 @@ public class ListaLigada {
 	 * 
 	 */
 	String imprimir() {
-		String resultado;
-		String nome = "";
-		Elemento percorre = raiz;
-		while (percorre != null){
-			nome += percorre.alu.nome + ",";
-			percorre = percorre.proximo;
+		if (raiz == null) {
+			return "{}";
 		}
-        resultado = "{" + nome + "}";
-
-        return resultado;
+		StringBuilder resultado = new StringBuilder("{");
+		Elemento percorre = raiz;
+		while (percorre != null) {
+			resultado.append(percorre.alu.nome);
+			percorre = percorre.proximo;
+			if (percorre != null) {
+				resultado.append(", ");
+			}
+		}
+		resultado.append("}");
+		return resultado.toString();
 	}
-	
-	
-	
+
+
+
+
 	/**
 	 * 
 	 * Dado um aluno, calcula a media das notas dele e retorna 
@@ -91,7 +105,20 @@ public class ListaLigada {
 	 * 
 	 */
 	Aluno encontrarMaiorMedia() {
-		return null;
+		if (raiz == null)
+			return null;
+		double maiorMedia = 0;
+		Aluno alunoMaiorMedia = null;
+		Elemento percorre = raiz;
+		while (percorre != null) {
+			double mediaCalculada = calcularMedia(percorre.alu);
+			if (mediaCalculada > maiorMedia){
+				maiorMedia = mediaCalculada;
+				alunoMaiorMedia = percorre.alu;
+			}
+			percorre = percorre.proximo;
+		}
+		return alunoMaiorMedia;
 	}
 	
 	
@@ -105,6 +132,12 @@ public class ListaLigada {
 	 * 
 	 */
 	boolean existeAlunoRA(int ra) {
+		Elemento percorre = raiz;
+		while (percorre != null) {
+			if (percorre.alu.ra == ra)
+				return true;
+			percorre = percorre.proximo;
+		}
 		return false;
 	}
 	

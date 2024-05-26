@@ -32,19 +32,19 @@ public class TesteListaLigada {
 		}
 	}
 
-	public static void testInserirCenario2() {
-		ListaLigada lista = new ListaLigada();
-		Aluno aluno1 = new Aluno("Joao", 123456, new double[] { 8.5, 7.0, 9.0 });
-		Aluno aluno2 = new Aluno("Maria", 654321, new double[] { 6.5, 8.0, 7.0 });
+		public static void testInserirCenario2() {
+			ListaLigada lista = new ListaLigada();
+			Aluno aluno1 = new Aluno("Joao", 123456, new double[] { 8.5, 7.0, 9.0 });
+			Aluno aluno2 = new Aluno("Maria", 654321, new double[] { 6.5, 8.0, 7.0 });
 
-		lista.inserir(aluno1);
-		lista.inserir(aluno2);
+			lista.inserir(aluno1);
+			lista.inserir(aluno2);
 
-		// Verifica se os alunos foram inseridos corretamente na lista
-		if (!lista.imprimir().equals("{Joao, Maria}")) {
-			System.out.println("Teste de inser�ao dos alunos1 e 2 falhou.");
+			// Verifica se os alunos foram inseridos corretamente na lista
+			if (!lista.imprimir().equals("{Joao, Maria}")) {
+				System.out.println("Teste de inser�ao dos alunos1 e 2 falhou.");
+			}
 		}
-	}
 
 	public static void testInserirCenario3() {
 		ListaLigada lista = new ListaLigada();
