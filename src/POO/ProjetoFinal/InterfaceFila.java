@@ -9,12 +9,9 @@ public class InterfaceFila extends JFrame {
     private JComboBox<String> comboTipoFila;
     private JPanel uiPanel;
     private JButton adicionarButton;
-    private JTable tableFila;
     private JButton ButtonChamar;
     private JButton ButtonAtender;
     private JButton ButtonSenhas;
-
-    private JScrollPane barraRolagem;
 
     private ControleDeFila fila = new ControleDeFila();
     public InterfaceFila(){
@@ -23,7 +20,6 @@ public class InterfaceFila extends JFrame {
        setDefaultCloseOperation(EXIT_ON_CLOSE);
        setSize(600, 300);
        setLocationRelativeTo(null);
-       criaGrid();
        adicionarButton.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
@@ -51,14 +47,12 @@ public class InterfaceFila extends JFrame {
                 //JOptionPane.showMessageDialog(uiPanel, fila.);
             }
         });
-    }
-    private void criaGrid(){
-        String [] Colunas = {"NORMAL", "VIP", "IDOSO", "PREFERENCIAL", "IDOSO80", "URGENTE"};
-        Object [][] dados = {{001, 002, 003, 004}};
-
-        tableFila = new JTable(dados, Colunas);
-        barraRolagem = new JScrollPane();
-        tableFila.add(barraRolagem);
+        ButtonSenhas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(uiPanel, fila.listarTodasAsSenhas())  ;
+            }
+        });
     }
     public static void main(String[] args) {
         new InterfaceFila();

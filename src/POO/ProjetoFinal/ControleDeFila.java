@@ -123,12 +123,14 @@ public class ControleDeFila {
         return "Fila " + tipo.tipo + " não encontrada.";
     }
 
-    public void listarTodasAsSenhas() {
-        for (TipoLista tipo : TipoLista.values()) {
+    public String listarTodasAsSenhas() {
+        StringBuilder todasAsSenhas = new StringBuilder();
+        for (TipoLista tipo : ordemPrioridade) {
             Fila fila = filas.get(tipo);
             if (fila != null) {
-                System.out.println(fila.listar());
+                todasAsSenhas.append(fila.listar()).append("\n");
             }
         }
+        return todasAsSenhas.toString();
     }
 }

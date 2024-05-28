@@ -30,7 +30,7 @@ public class Fila extends EstrategiaFIFO {
                 return fila.peek().retornarSenha();
             }
             return tipoLista.tipo + fila.peek().retornarSenha();
-        } return "Fila vazia. Não há senhas para atender.";
+        } return "Fila vazia "+tipoLista.tipo+". Não há senhas para atender.";
     }
     @Override
     public String atender() {
@@ -38,7 +38,7 @@ public class Fila extends EstrategiaFIFO {
             String SenhaRemovida = fila.poll().retornarSenha(); // Remove a próxima senha da fila
             return "Senha "+tipoLista.tipo + SenhaRemovida+" atendida com sucesso.";
         } else {
-            return "Fila vazia. Não há senhas para atender.";
+            return "Fila vazia "+tipoLista.tipo+". Não há senhas para atender.";
         }
     }
     @Override
@@ -50,6 +50,6 @@ public class Fila extends EstrategiaFIFO {
                 listaSenhas.append(f.retornarSenha()).append("\n");
             }
             return listaSenhas.toString();
-        } return "Fila vazia. Não há senhas para chamar.";
+        } return "Fila vazia "+tipoLista.tipo+". Não há senhas para atender.";
     }
 }
