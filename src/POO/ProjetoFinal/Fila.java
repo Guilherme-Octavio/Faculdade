@@ -27,7 +27,7 @@ public class Fila extends EstrategiaFIFO {
         if (!fila.isEmpty()){
             if (!fila.peek().getChamado()){
                 fila.peek().setChamado();
-                return fila.peek().retornarSenha();
+                return tipoLista.tipo + fila.peek().retornarSenha();
             }
             return tipoLista.tipo + fila.peek().retornarSenha();
         } return "Fila vazia "+tipoLista.tipo+". Não há senhas para atender.";
