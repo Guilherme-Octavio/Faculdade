@@ -1,18 +1,20 @@
 package POO.ProjetoFinal;
 
-/*
- * Autores         Guilherme Octávio Silva Amorim
- *               Lucas Lotti
- *               Augusto Calhas
- * Data          15/03/2024
- * Disciplina    Programação Orientada a Objetos
- * Atividade     AVALIATIVA FINAL (3SI)
- */
-
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public class ControleDeFila {
+public class ControleDeFila extends JFrame {
+    private JComboBox<String> comboTipoFila;
+    private JPanel uiPanel;
+    private JButton adicionarButton;
+    private JButton ButtonChamar;
+    private JButton ButtonAtender;
+    private JButton ButtonSenhas;
+
     private static final TipoLista[] ordemPrioridade = {
             TipoLista.URGENTE,
             TipoLista.IDOSO80,
@@ -24,40 +26,11 @@ public class ControleDeFila {
 
     private static final Map<TipoLista, Fila> filas = new HashMap<>();
 
-    public ControleDeFila() {
-        criarFilas();
-    }
-
     private void criarFilas() {
         for (TipoLista tipo : TipoLista.values()) {
             filas.put(tipo, new Fila(tipo));
         }
     }
-
-    public String inserirFila(TipoLista tipo) {
-        Fila filaSelecionada = filas.get(tipo);
-        if (filaSelecionada != null) {
-            return filaSelecionada.inserir();
-        }
-        return "Fila não encontrada: "+ tipo;
-    }
-
-    public void removerFila(TipoLista tipo) {
-        Fila filaSelecionada = filas.get(tipo);
-        if (filaSelecionada != null) {
-            filaSelecionada.remover();
-        }
-    }
-
-    private boolean existeSenha(){
-        for (TipoLista tipo : ordemPrioridade){
-            Fila fila = filas.get(tipo);
-            if (!fila.fila.isEmpty()){
-                return true;
-            }
-        } return false;
-    }
-
     public Fila getFilaPossuiSenhaChamada(){
         for (TipoLista tipo : ordemPrioridade){
             Fila fila = filas.get(tipo);
@@ -70,20 +43,6 @@ public class ControleDeFila {
             }
         } return null;
     }
-
-    public String chamarProximaSenha() {
-        if (!existeSenha())
-            return "Todas as filas estão vazias.";
-        else{
-            Fila fila = getFilaPossuiSenhaChamada();
-            if (fila != null){
-                return fila.chamar();
-            }else{
-                return chamarSenha();
-            }
-        }
-    }
-
     private String chamarSenha(){
         for (TipoLista tipo : ordemPrioridade){
             Fila fila = filas.get(tipo);
@@ -92,20 +51,14 @@ public class ControleDeFila {
             }
         } return null;
     }
-
-    public String atenderProximaSenha() {
-        if (!existeSenha())
-            return "Todas as filas estão vazias.";
-        else{
-            Fila fila = getFilaPossuiSenhaChamada();
-            if (fila != null){
-                return fila.atender();
-            }else{
-                return atenderSenha();
+    private boolean existeSenha(){
+        for (TipoLista tipo : ordemPrioridade){
+            Fila fila = filas.get(tipo);
+            if (!fila.fila.isEmpty()){
+                return true;
             }
-        }
+        } return false;
     }
-
     private String atenderSenha() {
         for (TipoLista tipo : ordemPrioridade){
             Fila fila = filas.get(tipo);
@@ -114,23 +67,71 @@ public class ControleDeFila {
             }
         } return null;
     }
-
-    public String listarSenhas(TipoLista tipo) {
-        Fila filaSelecionada = filas.get(tipo);
-        if (filaSelecionada != null) {
-            return filaSelecionada.listar();
-        }
-        return "Fila " + tipo.tipo + " não encontrada.";
-    }
-
-    public String listarTodasAsSenhas() {
-        StringBuilder todasAsSenhas = new StringBuilder();
-        for (TipoLista tipo : ordemPrioridade) {
-            Fila fila = filas.get(tipo);
-            if (fila != null) {
-                todasAsSenhas.append(fila.listar()).append("\n");
+    public ControleDeFila(){
+       setContentPane(uiPanel);
+       setTitle("Tutorial");
+       setDefaultCloseOperation(EXIT_ON_CLOSE);
+       setSize(600, 300);
+       setLocationRelativeTo(null);
+       criarFilas();
+       setVisible(true);
+       adicionarButton.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               TipoLista tipo = TipoLista.valueOf(Objects.requireNonNull(comboTipoFila.getSelectedItem()).toString());
+               Fila filaSelecionada = filas.get(tipo);
+               if (filaSelecionada != null) {
+                   JOptionPane.showMessageDialog(uiPanel, filaSelecionada.inserir());
+               }
+               else
+                    JOptionPane.showMessageDialog(uiPanel,"Fila não encontrada: "+ tipo);
+           }
+       });
+        ButtonChamar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!existeSenha())
+                    JOptionPane.showMessageDialog(uiPanel, "Todas as filas estão vazias.");
+                else{
+                    Fila fila = getFilaPossuiSenhaChamada();
+                    if (fila != null){
+                        JOptionPane.showMessageDialog(uiPanel, fila.chamar());
+                    }else{
+                        JOptionPane.showMessageDialog(uiPanel, chamarSenha());
+                    }
+                }
             }
-        }
-        return todasAsSenhas.toString();
+        });
+        ButtonAtender.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!existeSenha())
+                    JOptionPane.showMessageDialog(uiPanel, "Todas as filas estão vazias.");
+                else{
+                    Fila fila = getFilaPossuiSenhaChamada();
+                    if (fila != null){
+                        JOptionPane.showMessageDialog(uiPanel, fila.atender());
+                    }else{
+                        JOptionPane.showMessageDialog(uiPanel, atenderSenha());
+                    }
+                }
+            }
+        });
+        ButtonSenhas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                StringBuilder todasAsSenhas = new StringBuilder();
+                for (TipoLista tipo : ordemPrioridade) {
+                    Fila fila = filas.get(tipo);
+                    if (fila != null) {
+                        todasAsSenhas.append(fila.listar()).append("\n");
+                    }
+                }
+                JOptionPane.showMessageDialog(uiPanel, todasAsSenhas.toString());
+            }
+        });
+    }
+    public static void main(String[] args) {
+        new ControleDeFila();
     }
 }
